@@ -9,8 +9,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,9 +25,10 @@ class SudokuScreen extends JPanel {
     public final JButton[][] grid = new JButton[9][9];
     private int n = 1;
     private String number = String.valueOf(n);
+    private int[][] table = new int[9][9];
 
     public void init() {
-
+        nextBoard(1);
         makeBox();
     }
 
@@ -168,28 +167,21 @@ class SudokuScreen extends JPanel {
         grid[8][5].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
     }
 
-    public void generateSudoku() {
-
-        int[][] table = new int[9][9];
-        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    public int[][] nextBoard(int difficulty) {
         
-        for (int x = 0; x < 9; x++) {
-            for (int row = 0; row < 9; row++) {
-                for (int col = 0; col < 9; col++) {
-                    Random rn = new Random();
-                    int range = 9 - 1 + 1;
-                    int randomNum = rn.nextInt(range) + 1;
-                    table[0][randomNum - 1] = numbers[x];
-                }
-            }
-        }
+        nextCell(0, 0);
+        makeHoles(difficulty);
+        return table;
 
+    }
+
+    public void generateSudoku() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (String.valueOf(table[i][j]).equals(String.valueOf(0))) {
                     grid[i][j].setText("");
                 } else {
-                    grid[i][j].setText(String.valueOf(table[i][j]));
+                grid[i][j].setText(String.valueOf(table[i][j]));
                 }
             }
         }
@@ -266,4 +258,95 @@ class SudokuScreen extends JPanel {
         init();
     }
 
+    public boolean nextCell(int x, int y) {
+        int nextX = x;
+        int nextY = y;
+        int[] toCheck = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        Random r = new Random();
+        int tmp = 0;
+        int current = 0;
+        int top = toCheck.length;
+
+        for (int i = top - 1; i > 0; i--) {
+            current = r.nextInt(i);
+            tmp = toCheck[current];
+            toCheck[current] = toCheck[i];
+            toCheck[i] = tmp;
+        }
+
+        for (int i = 0; i < toCheck.length; i++) {
+            if (legalMove(x, y, toCheck[i])) {
+                table[x][y] = toCheck[i];
+                if (x == 8) {
+                    if (y == 8) {
+                        return true;//We're done!  Yay!
+                    } else {
+                        nextX = 0;
+                        nextY = y + 1;
+                    }
+                } else {
+                    nextX = x + 1;
+                }
+                if (nextCell(nextX, nextY)) {
+                    return true;
+                }
+            }
+        }
+        table[x][y] = 0;
+        return false;
+    }
+
+    private boolean legalMove(int x, int y, int current) {
+        for (int i = 0; i < 9; i++) {
+            if (current == table[x][i]) {
+                return false;
+            }
+        }
+        for (int i = 0; i < 9; i++) {
+            if (current == table[i][y]) {
+                return false;
+            }
+        }
+        int cornerX = 0;
+        int cornerY = 0;
+        if (x > 2) {
+            if (x > 5) {
+                cornerX = 6;
+            } else {
+                cornerX = 3;
+            }
+        }
+        if (y > 2) {
+            if (y > 5) {
+                cornerY = 6;
+            } else {
+                cornerY = 3;
+            }
+        }
+        for (int i = cornerX; i < 10 && i < cornerX + 3; i++) {
+            for (int j = cornerY; j < 10 && j < cornerY + 3; j++) {
+                if (current == table[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void makeHoles(int holesToMake) {
+ 
+        double remainingSquares = 81;
+        double remainingHoles = (double) holesToMake;
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                double holeChance = remainingHoles / remainingSquares;
+                if (Math.random() <= holeChance) {
+                    table[i][j] = 0;
+                    remainingHoles--;
+                }
+                remainingSquares--;
+            }
+        }
+    }
 }

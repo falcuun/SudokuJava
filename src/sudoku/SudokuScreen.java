@@ -9,21 +9,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 class SudokuScreen extends JPanel {
 
     private GridLayout gridLaout;
-    public  JButton[][] grid = new JButton[9][9];
+    public JButton[][] grid = new JButton[9][9];
     private int n = 1;
     private String number = String.valueOf(n);
     private int[][] table = new int[9][9];
@@ -33,14 +34,80 @@ class SudokuScreen extends JPanel {
 
     public void init() {
         makeBox();
-        nextBoard();     
+        nextBoard();
     }
 
+    private MouseListener ms = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            if (SwingUtilities.isRightMouseButton(e)) {
+                Object source = e.getSource();
+                for (JButton[] dim1 : grid) {
+                    for (JButton button : dim1) {
+                        if (button == source) {
+                            int xy;
+                            if (button.getText().isEmpty() || button.getText() == null) {
+                                xy = 0;
+                            } else {
+                                xy = Integer.parseInt(button.getText());
+                            }
+                            if (xy > 1) {
+                                xy--;
+                                button.setText(String.valueOf(xy));
+                            } else {
+                                xy = 9;
+                                button.setText(String.valueOf(xy));
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (SwingUtilities.isMiddleMouseButton(e)) {
+                Object source = e.getSource();
+                for (JButton[] dim1 : grid) {
+                    for (JButton button : dim1) {
+                        if (button == source) {
+                            int xy;
+                            if (!button.getText().isEmpty()) {
+                                xy = 0;
+                                button.setText("");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+    };
+
     private void lockedKeys() {
-        for (int x = 0; x < 9; x++){
-            for (int y = 0; y < 9; y++){
-                if (!grid[x][y].getText().isEmpty()){
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                if (!grid[x][y].getText().isEmpty()) {
                     grid[x][y].setEnabled(false);
+                    grid[x][y].removeMouseListener(ms);
+
                 }
             }
         }
@@ -79,9 +146,9 @@ class SudokuScreen extends JPanel {
                             }
                         }
                     }
-                    
-                });
 
+                });
+                grid[x][y].addMouseListener(ms);
                 this.add(grid[x][y]);
             }
         }
@@ -218,7 +285,7 @@ class SudokuScreen extends JPanel {
             }
         }
         return false;
-    }    
+    }
 
     public SudokuScreen(int dif) {
         this.DIFFICULTY = dif;
@@ -323,5 +390,5 @@ class SudokuScreen extends JPanel {
             }
         }
     }
-    
+
 }

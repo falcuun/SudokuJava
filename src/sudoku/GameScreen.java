@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,7 @@ public class GameScreen {
     public GameScreen(int dif) {
         this.DIF = dif;
     }
+    public JFrame frame;
 
     public void startGame() {
         SudokuScreen ss = new SudokuScreen(DIF);
@@ -35,8 +37,7 @@ public class GameScreen {
         jb.setFont(new Font("ARIEL", Font.PLAIN, 40));
         jb1.setFont(new Font("ARIEL", Font.PLAIN, 40));
 
-        JFrame frame = new JFrame("Sudoku");
-
+        frame = new JFrame("Sudoku");
         BorderLayout bl = new BorderLayout();
         bl.addLayoutComponent(jb, BorderLayout.SOUTH);
         bl.addLayoutComponent(ss, BorderLayout.CENTER);
@@ -55,13 +56,35 @@ public class GameScreen {
 
         ss.generateSudoku();
         jb1.addActionListener((ActionEvent e) -> {
-            frame.dispose(); 
+            frame.dispose();
             start = new StartingScreen();
-            start.choosingDif();;
+            start.choosingDif();
         });
 
         jb.addActionListener((ActionEvent e) -> {
-            ss.win();
+            int[][] table1 = new int[9][9];
+            try {
+                for (int row = 0; row < 9; row++) {
+                    for (int col = 0; col < 9; col++) {
+                        table1[col][row] = Integer.parseInt(ss.grid[row][col].getText());
+
+                    }
+                }
+                System.out.println(ss.checkForDuplicatesRow(table1));
+                System.out.println(ss.checkForDuplicatesColumn(table1));
+
+                if (ss.checkForDuplicatesColumn(table1) == false && ss.checkForDuplicatesRow(table1) == false) {
+                    JOptionPane.showMessageDialog(frame, "YOU WON!");
+                    frame.dispose();
+                    start = new StartingScreen();
+                    start.choosingDif();
+                } else {
+                    JOptionPane.showMessageDialog(frame, "You didn't really... win? ");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "You don't have all the numbers, mate");
+            }
         });
     }
     StartingScreen start;

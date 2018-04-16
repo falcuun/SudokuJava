@@ -29,6 +29,7 @@ class SudokuScreen extends JPanel {
     private int[][] table = new int[9][9];
     public int DIFFICULTY;
     private StartingScreen startScreen;
+    private GameScreen gs;
 
     public void init() {
         makeBox();
@@ -218,32 +219,6 @@ class SudokuScreen extends JPanel {
         }
         return false;
     }    
-    
-    public void win(){
-        int[][] table1 = new int[9][9];
-            try {
-                for (int row = 0; row < 9; row++) {
-                    for (int col = 0; col < 9; col++) {
-                        table1[col][row] = Integer.parseInt(grid[row][col].getText());
-
-                    }
-                }
-                System.out.println(checkForDuplicatesRow(table1));
-                System.out.println(checkForDuplicatesColumn(table1));
-                
-                if (checkForDuplicatesColumn(table1) == false && checkForDuplicatesRow(table1) == false){
-                    JOptionPane.showMessageDialog(this, "YOU WON!");
-                    
-                    startScreen = new StartingScreen();
-                    startScreen.choosingDif();
-                } else {
-                    JOptionPane.showMessageDialog(this, "You didn't really... win? ");
-                }
-
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "You don't have all the numbers, mate");
-            }
-    }
 
     public SudokuScreen(int dif) {
         this.DIFFICULTY = dif;

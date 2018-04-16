@@ -30,6 +30,13 @@ public class Sudoku {
         JRadioButton jrb2 = new JRadioButton("HARD");
         JRadioButton jrb3 = new JRadioButton("EXTREME");
 
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(jrb);
+        bg.add(jrb1);
+        bg.add(jrb2);
+        bg.add(jrb3);
+        bg.setSelected(jrb.getModel(), true);
+
         JPanel panel = new JPanel(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();

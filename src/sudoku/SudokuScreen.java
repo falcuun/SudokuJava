@@ -98,86 +98,46 @@ class SudokuScreen extends JPanel {
         grid[1][0].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         grid[2][1].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         grid[2][0].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        //second box
-        grid[2][3].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[2][4].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[2][5].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[1][3].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[1][4].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[1][5].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[0][3].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[0][4].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        grid[0][5].setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
         //third box     
-        grid[2][6].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[2][7].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[2][8].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[1][6].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[1][7].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[1][8].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[0][6].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[0][7].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        grid[0][8].setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        //fourth box
-        grid[3][0].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[3][1].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[3][2].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[4][0].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[4][1].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[4][2].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[5][0].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[5][1].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
-        grid[5][2].setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
+        grid[2][6].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[2][7].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[2][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[1][6].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[1][7].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[1][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[0][6].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[0][7].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[0][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         //fifth box
-        grid[3][3].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[3][4].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[3][5].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[4][3].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[4][4].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[4][5].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[5][3].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[5][4].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        grid[5][5].setBorder(BorderFactory.createLineBorder(new Color(132, 76, 27), 2));
-        //sixth box
-        grid[3][6].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[3][7].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[3][8].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[4][6].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[4][7].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[4][8].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[5][6].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[5][7].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
-        grid[5][8].setBorder(BorderFactory.createLineBorder(new Color(91, 25, 196), 2));
+        grid[3][3].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[3][4].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[3][5].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[4][3].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[4][4].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[4][5].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[5][3].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[5][4].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[5][5].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         //seventh box
-        grid[6][0].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[6][1].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[6][2].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[7][0].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[7][1].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[7][2].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[8][0].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[8][1].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-        grid[8][2].setBorder(BorderFactory.createLineBorder(new Color(213, 67, 249), 2));
-//        //eight box
-        grid[6][6].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[6][7].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[6][8].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[7][6].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[7][7].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[7][8].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[8][6].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[8][7].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
-        grid[8][8].setBorder(BorderFactory.createLineBorder(new Color(32, 91, 9), 2));
+        grid[6][0].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[6][1].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[6][2].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[7][0].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[7][1].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[7][2].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[8][0].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[8][1].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[8][2].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 //        //ninth box
-        grid[6][3].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[6][4].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[6][5].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[7][3].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[7][4].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[7][5].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[8][3].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[8][4].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-        grid[8][5].setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+        grid[6][6].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[6][7].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[6][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[7][6].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[7][7].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[7][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[8][6].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[8][7].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        grid[8][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 
     public int[][] nextBoard(int difficulty) {

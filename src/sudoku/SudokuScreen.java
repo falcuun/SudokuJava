@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,14 +23,25 @@ import javax.swing.UnsupportedLookAndFeelException;
 class SudokuScreen extends JPanel {
 
     private GridLayout gridLaout;
-    public final JButton[][] grid = new JButton[9][9];
+    public  JButton[][] grid = new JButton[9][9];
     private int n = 1;
     private String number = String.valueOf(n);
     private int[][] table = new int[9][9];
+    public int DIFFICULTY;
 
     public void init() {
-        nextBoard(1);
         makeBox();
+        nextBoard(DIFFICULTY);     
+    }
+
+    private void lockedKeys() {
+        for (int x = 0; x < 9; x++){
+            for (int y = 0; y < 9; y++){
+                if (!grid[x][y].getText().isEmpty()){
+                    grid[x][y].setEnabled(false);
+                }
+            }
+        }
     }
 
     public void makeBox() {
@@ -65,6 +77,7 @@ class SudokuScreen extends JPanel {
                             }
                         }
                     }
+                    
                 });
 
                 this.add(grid[x][y]);
@@ -168,11 +181,9 @@ class SudokuScreen extends JPanel {
     }
 
     public int[][] nextBoard(int difficulty) {
-        
         nextCell(0, 0);
         makeHoles(difficulty);
         return table;
-
     }
 
     public void generateSudoku() {
@@ -181,11 +192,11 @@ class SudokuScreen extends JPanel {
                 if (String.valueOf(table[i][j]).equals(String.valueOf(0))) {
                     grid[i][j].setText("");
                 } else {
-                grid[i][j].setText(String.valueOf(table[i][j]));
+                    grid[i][j].setText(String.valueOf(table[i][j]));
                 }
             }
         }
-
+        lockedKeys();
     }
 
     public void buttonActionPerformed(ActionEvent ea) {
@@ -245,9 +256,36 @@ class SudokuScreen extends JPanel {
             }
         }
         return false;
+    }    
+    
+    public void win(){
+        int[][] table1 = new int[9][9];
+            try {
+                for (int row = 0; row < 9; row++) {
+                    for (int col = 0; col < 9; col++) {
+                        table1[col][row] = Integer.parseInt(grid[row][col].getText());
+
+                    }
+                }
+                System.out.println(checkForDuplicatesRow(table1));
+                System.out.println(checkForDuplicatesColumn(table1));
+                
+                if (checkForDuplicatesColumn(table1) == false && checkForDuplicatesRow(table1) == false){
+                    JOptionPane.showMessageDialog(this, "YOU WON!");
+                    DIFFICULTY = Integer.parseInt(JOptionPane.showInputDialog("Enter new Difficulty!"));
+                    makeBox();
+                    nextBoard(DIFFICULTY);
+                } else {
+                    JOptionPane.showMessageDialog(this, "You didn't really... win? ");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "You don't have all the numbers, mate");
+            }
     }
 
-    public SudokuScreen() {
+    public SudokuScreen(int dif) {
+        this.DIFFICULTY = dif;
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
@@ -258,7 +296,7 @@ class SudokuScreen extends JPanel {
         init();
     }
 
-    public boolean nextCell(int x, int y) {
+    private boolean nextCell(int x, int y) {
         int nextX = x;
         int nextY = y;
         int[] toCheck = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -279,6 +317,7 @@ class SudokuScreen extends JPanel {
                 table[x][y] = toCheck[i];
                 if (x == 8) {
                     if (y == 8) {
+
                         return true;//We're done!  Yay!
                     } else {
                         nextX = 0;
@@ -293,6 +332,7 @@ class SudokuScreen extends JPanel {
             }
         }
         table[x][y] = 0;
+
         return false;
     }
 
@@ -333,8 +373,8 @@ class SudokuScreen extends JPanel {
         return true;
     }
 
-    public void makeHoles(int holesToMake) {
- 
+    private void makeHoles(int holesToMake) {
+
         double remainingSquares = 81;
         double remainingHoles = (double) holesToMake;
 
@@ -349,4 +389,5 @@ class SudokuScreen extends JPanel {
             }
         }
     }
+    
 }

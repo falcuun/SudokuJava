@@ -28,10 +28,11 @@ class SudokuScreen extends JPanel {
     private String number = String.valueOf(n);
     private int[][] table = new int[9][9];
     public int DIFFICULTY;
+    private StartingScreen startScreen;
 
     public void init() {
         makeBox();
-        nextBoard(DIFFICULTY);     
+        nextBoard();     
     }
 
     private void lockedKeys() {
@@ -140,9 +141,9 @@ class SudokuScreen extends JPanel {
         grid[8][8].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 
-    public int[][] nextBoard(int difficulty) {
+    public int[][] nextBoard() {
         nextCell(0, 0);
-        makeHoles(difficulty);
+        makeHoles(DIFFICULTY);
         return table;
     }
 
@@ -232,9 +233,9 @@ class SudokuScreen extends JPanel {
                 
                 if (checkForDuplicatesColumn(table1) == false && checkForDuplicatesRow(table1) == false){
                     JOptionPane.showMessageDialog(this, "YOU WON!");
-                    DIFFICULTY = Integer.parseInt(JOptionPane.showInputDialog("Enter new Difficulty!"));
-                    makeBox();
-                    nextBoard(DIFFICULTY);
+                    
+                    startScreen = new StartingScreen();
+                    startScreen.choosingDif();
                 } else {
                     JOptionPane.showMessageDialog(this, "You didn't really... win? ");
                 }
@@ -334,10 +335,8 @@ class SudokuScreen extends JPanel {
     }
 
     private void makeHoles(int holesToMake) {
-
         double remainingSquares = 81;
         double remainingHoles = (double) holesToMake;
-
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 double holeChance = remainingHoles / remainingSquares;

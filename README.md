@@ -8,3 +8,7 @@
   - First screen will open asking for difficulty
   - Once selected, you can click on start game
   - Enjoy!
+  
+### Work to be done
+  - The UI Needs some changes
+  - Mouse events might not work on JAVA 9+
